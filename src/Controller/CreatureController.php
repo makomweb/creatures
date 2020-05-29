@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Creature;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 class CreatureController extends AbstractController
 {
@@ -19,7 +20,7 @@ class CreatureController extends AbstractController
     }
 
     /**
-     * @Route("/creature", name="create_creature")
+     * @Route("/create_creature", name="create_creature")
      */
     public function createProduct(): Response
     {
