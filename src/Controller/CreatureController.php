@@ -3,12 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Creature;
+use App\Repository\CreatureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 class CreatureController extends AbstractController
 {
+    private $repository;
+
+    public function __construct(CreatureRepository $repository) 
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * @Route("/creature", name="creature")
      */
@@ -24,9 +32,7 @@ class CreatureController extends AbstractController
      */
     public function show($id)
     {
-        $creature = $this->getDoctrine()
-            ->getRepository(Creature::class)
-            ->find($id);
+        $creature = $this->repository->find($id);
 
         if (!$creature) {
             throw $this->createNotFoundException(
