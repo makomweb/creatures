@@ -20,6 +20,28 @@ class CreatureController extends AbstractController
     }
 
     /**
+     * @Route("/creature/{id}", name="creature_show")
+     */
+    public function show($id)
+    {
+        $creature = $this->getDoctrine()
+            ->getRepository(Creature::class)
+            ->find($id);
+
+        if (!$creature) {
+            throw $this->createNotFoundException(
+                'No creature found for id '.$id
+            );
+        }
+
+        return new Response('Check out this creature: '.$creature->getName());
+
+        // or render a template
+        // in the template, print things with {{ product.name }}
+        // return $this->render('product/show.html.twig', ['product' => $product]);
+    }
+
+    /**
      * @Route("/create_creature", name="create_creature")
      */
     public function createProduct(): Response
