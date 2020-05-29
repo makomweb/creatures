@@ -21,7 +21,7 @@ class CreatureController extends AbstractController
     }
 
     /**
-     * List all creatures
+     * List all creatures.
      * 
      * @Route("/", name="creature_index")
      */
@@ -36,9 +36,11 @@ class CreatureController extends AbstractController
     }
 
     /**
-     * @Route("/creature/{id}", name="creature_show")
+     * Show a single creature entity.
+     * 
+     * @Route("/{id}", name="creature_show")
      */
-    public function show($id)
+    public function showAction($id)
     {
         $creature = $this->repository->findById($id);
 
@@ -48,11 +50,10 @@ class CreatureController extends AbstractController
             );
         }
 
-        return new Response('Check out this creature: '.$creature->getName());
-
-        // or render a template
-        // in the template, print things with {{ product.name }}
-        // return $this->render('product/show.html.twig', ['product' => $product]);
+        return $this->render('creature/show.html.twig',
+            [
+                'entity' => $creature
+            ]);
     }
 
     /**
