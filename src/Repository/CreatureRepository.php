@@ -47,4 +47,15 @@ class CreatureRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findById($id)
+    {
+        return $this->findOneBy(['id' => $id]);
+    }
+
+    public function save(Creature $creature)
+    {
+        $this->_em->persist($creature);
+        $this->_em->flush();
+    }
 }

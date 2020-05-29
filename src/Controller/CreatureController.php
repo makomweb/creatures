@@ -32,7 +32,7 @@ class CreatureController extends AbstractController
      */
     public function show($id)
     {
-        $creature = $this->repository->find($id);
+        $creature = $this->repository->findById($id);
 
         if (!$creature) {
             throw $this->createNotFoundException(
@@ -52,20 +52,12 @@ class CreatureController extends AbstractController
      */
     public function createProduct(): Response
     {
-        // you can fetch the EntityManager via $this->getDoctrine()
-        // or you can add an argument to the action: createProduct(EntityManagerInterface $entityManager)
-        $entityManager = $this->getDoctrine()->getManager();
-
         $creature = new Creature();
         $creature->setName('Goblin');
         $creature->setAttack(1999);
         $creature->setDefense(222);
 
-        // tell Doctrine you want to (eventually) save the Creature (no queries yet)
-        $entityManager->persist($creature);
-
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
+        $this->repository->save($creature);
 
         return new Response('Saved new creature with id '.$creature->getId());
     }
