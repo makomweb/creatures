@@ -8,6 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @Route("/creature")
+ */
 class CreatureController extends AbstractController
 {
     private $repository;
@@ -18,13 +21,18 @@ class CreatureController extends AbstractController
     }
 
     /**
-     * @Route("/creature", name="creature")
+     * List all creatures
+     * 
+     * @Route("/", name="creature_index")
      */
-    public function index()
+    public function indexAction()
     {
-        return $this->render('creature/index.html.twig', [
-            'controller_name' => 'CreatureController',
-        ]);
+        $creatures = $this->repository->findAll();
+        
+        return $this->render('creature/index.html.twig',
+            [
+                'entities' => $creatures
+            ]);
     }
 
     /**

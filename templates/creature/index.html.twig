@@ -1,20 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CreatureController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Creature list</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Attack</th>
+                <th>Defense</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('creature_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.defense }}</td>
+                <td>{{ entity.attack }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('creature_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('creature_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Workspace/symfony/first-db-project/src/Controller/CreatureController.php'|file_link(0) }}">src/Controller/CreatureController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Workspace/symfony/first-db-project/templates/creature/index.html.twig'|file_link(0) }}">templates/creature/index.html.twig</a></code></li>
+        <ul>
+        <li>
+            <a href="{{ path('creature_new') }}">
+                Create a new entry
+            </a>
+        </li>
     </ul>
-</div>
-{% endblock %}
+    {% endblock %}
