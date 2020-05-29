@@ -27,6 +27,11 @@ class Creature
      */
     private $Defense;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Name;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,18 @@ class Creature
     public function setDefense(int $Defense): self
     {
         $this->Defense = $Defense;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->Name;
+    }
+
+    public function setName(string $Name): self
+    {
+        $this->Name = $Name;
 
         return $this;
     }
