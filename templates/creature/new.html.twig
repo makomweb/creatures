@@ -1,20 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block body -%}
-    <h1>Creature creation</h1>
+{% block title %}Hello!{% endblock %}
 
-    {{ form_start(form, {'method': 'POST', 'action': 'create'}) }}
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
-    {{ form_end(form) }}
+{% block body %}
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('creature_index') }}">
-                Back to the list
-            </a>
-        </li>
-    </ul>
+    {{ form(creature_form) }}
+
 {% endblock %}

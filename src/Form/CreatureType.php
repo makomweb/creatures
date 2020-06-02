@@ -11,10 +11,10 @@ class CreatureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
+        $builder        
+            ->add('Name')
             ->add('Attack')
             ->add('Defense')
-            ->add('Name')
         ;
     }
 
