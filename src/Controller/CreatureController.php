@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Creature;
+use App\Form\CreatureType;
 use App\Repository\CreatureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route("/creature")
@@ -23,28 +25,28 @@ class CreatureController extends AbstractController
     /**
      * List all creatures.
      * 
-     * @Route("/", name="creature_index")
+     * @Route("/index", name="creature_index")
      */
     public function indexAction()
     {
-        $creatures = $this->repository->findAll();
+        $entities = $this->repository->findAll();
         
         return $this->render('creature/index.html.twig',
             [
-                'entities' => $creatures
+                'entities' => $entities
             ]);
     }
 
     /**
      * Show a single creature entity.
      * 
-     * @Route("/{id}", name="creature_show")
+     * @Route("/show/{id}", name="creature_show")
      */
     public function showAction($id)
     {
-        $creature = $this->repository->findById($id);
+        $entity = $this->repository->findById($id);
 
-        if (!$creature) {
+        if (!$entity) {
             throw $this->createNotFoundException(
                 'No creature found for id '.$id
             );
@@ -52,22 +54,65 @@ class CreatureController extends AbstractController
 
         return $this->render('creature/show.html.twig',
             [
-                'entity' => $creature
+                'entity' => $entity
             ]);
     }
 
     /**
-     * @Route("/create_creature", name="create_creature")
+     * Create a new creature entity in the database.
+     * 
+     * @Route("/create", name="creature_create", methods={"POST"})
      */
-    public function createProduct(): Response
+    public function createAction(Request $request): Response
     {
-        $creature = new Creature();
-        $creature->setName('Goblin');
-        $creature->setAttack(1999);
-        $creature->setDefense(222);
+        $entity = new Creature();
+        
+        $form = $this->createForm(CreatureType::class, $entity);
+        $form->submit($request);
 
-        $this->repository->save($creature);
+        if ($form->isValid())
+        {
+            $this->repository->save($entity);
+            $targetUrl = $this->generateUrl('creature_show', array('id' => $entity->getId()));
+            return $this->redirect($targetUrl);
+        }
 
-        return new Response('Saved new creature with id '.$creature->getId());
+        return $this->render('creature/new.html.twig',
+        [
+            'entity' => $entity,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/new", name="creature_new")
+     */
+    public function newAction(): Response
+    {
+        $entity = new Creature();
+
+        $form = $this->createForm(CreatureType::class, $entity);
+
+        return $this->render('creature/new.html.twig',
+        [
+            'entity' => $entity,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * Display a form to edit a creature.
+     * 
+     * @Route("/edit/{id}", name="creature_edit")
+     */
+    public function editAction($id)
+    {
+        $entity = $this->repository->findById($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException(
+                'No creature found for id '.$id
+            );
+        }
     }
 }
