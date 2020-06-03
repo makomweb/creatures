@@ -59,42 +59,23 @@ class CreatureController extends AbstractController
     }
 
     /**
-     * Create a new creature entity in the database.
-     * 
-     * @Route("/create", name="creature_create", methods={"POST"})
-     */
-    public function createAction(Request $request): Response
-    {
-        $entity = new Creature();
-        
-        $form = $this->createForm(CreatureType::class, $entity);
-        $form->submit($request);
-
-        if ($form->isValid())
-        {
-            $this->repository->save($entity);
-            $targetUrl = $this->generateUrl('creature_show', array('id' => $entity->getId()));
-            return $this->redirect($targetUrl);
-        }
-
-        return $this->render('creature/new.html.twig',
-        [
-            'entity' => $entity,
-            'form' => $form->createView()
-        ]);
-    }
-
-    /**
      * @Route("/new", name="creature_new")
      */
-    public function newAction(): Response
+    public function newAction(Request $request): Response
     {
         $creature = new Creature();
 
         $form = $this->createForm(CreatureType::class, $creature, [
-            'action' => $this->generateUrl('creature_new'), 
-            'method' => 'POST'
+            'action' => $this->generateUrl('creature_new')
         ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            //var_dump($creature); die();
+            $this->repository->save($creature);
+        }
 
         return $this->render('creature/new.html.twig',
         [
@@ -116,5 +97,16 @@ class CreatureController extends AbstractController
                 'No creature found for id '.$id
             );
         }
+    }
+
+
+    /**
+     * Delete a creature.
+     * 
+     * @Route("/delete/{id}", name="creature_delete")
+     */
+    public function deleteAction($id)
+    {
+        $this->repository->removeById($id);
     }
 }
