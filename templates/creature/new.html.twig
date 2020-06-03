@@ -4,6 +4,17 @@
 
 {% block body %}
 
-    {{ form(creature_form) }}
+    {{ form_start(creature_form, { 'attr':
+            { 
+                'id': 'custom_creature_form', 
+                'class': 'some_custom_class',
+                'action': 'action/action'
+            }}
+        )
+    }}
+    
+        {{ form(creature_form) }}
+
+    {{ form_end(creature_form) }}
 
 {% endblock %}
