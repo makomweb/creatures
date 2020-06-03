@@ -91,7 +91,10 @@ class CreatureController extends AbstractController
     {
         $creature = new Creature();
 
-        $form = $this->createForm(CreatureType::class, $creature);
+        $form = $this->createForm(CreatureType::class, $creature, [
+            'action' => $this->generateUrl('creature_new'), 
+            'method' => 'POST'
+        ]);
 
         return $this->render('creature/new.html.twig',
         [
