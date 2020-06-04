@@ -1,18 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello!{% endblock %}
-
 {% block body %}
 
-    {{ form_start(creature_form, { 'attr':
-            { 
-                'id': 'custom_creature_form', 
-                'class': 'some_custom_class'
-            }}
-        )
-    }}
+    <h1>Create a new creature</h1>
+
+    {{ form_start(creature_form) }}
     
-        {{ form(creature_form) }}
+    {{ form_widget(creature_form) }}
 
     {{ form_end(creature_form) }}
 

@@ -64,6 +64,7 @@ class CreatureController extends AbstractController
     public function newAction(Request $request): Response
     {
         $creature = new Creature();
+        $creature->setAttack(666);
 
         $form = $this->createForm(CreatureType::class, $creature, [
             'action' => $this->generateUrl('creature_new')

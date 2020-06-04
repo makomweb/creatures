@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Creature list</h1>
+    <h1>List of creatures</h1>
 
-    <table class="records_list">
+    <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>#</th>
                 <th>Name</th>
                 <th>Attack</th>
                 <th>Defense</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -20,28 +21,21 @@
                 <td>{{ entity.defense }}</td>
                 <td>{{ entity.attack }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('creature_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('creature_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('creature_delete', { 'id': entity.id }) }}">delete</a>
-                    </li>
-                </ul>
+                    <div class="btn-group">
+                        <a href="{{ path('creature_show', { 'id': entity.id }) }}"
+                            class="btn btn-outline-secondary btn-sm">Details</a>
+                        <a href="{{ path('creature_edit', { 'id': entity.id }) }}"
+                            class="btn btn-outline-secondary btn-sm">Edit</a>
+                        <a href="{{ path('creature_delete', { 'id': entity.id }) }}"
+                            class="btn btn-outline-secondary btn-sm">Delete</a>
+                    </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('creature_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+    <div class="d-flex justify-content-center">
+        <a href="{{ path('creature_new') }}" class="btn btn-primary">Create a new entry</a>
+    </div>
+{% endblock %}
