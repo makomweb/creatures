@@ -62,7 +62,10 @@ class CreatureRepository extends ServiceEntityRepository
     public function removeById($id)
     {
         $entity = $this->findById($id);
-        $this->_em->remove($remove);
-        $this->_em->flush();
+        if ($entity !== null)
+        {
+            $this->_em->remove($entity);
+            $this->_em->flush();
+        }
     }
 }

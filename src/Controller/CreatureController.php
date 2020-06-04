@@ -73,8 +73,8 @@ class CreatureController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            //var_dump($creature); die();
-            $this->repository->save($creature);
+            $this->repository->save($creature);            
+            return $this->redirectToRoute('creature_index');
         }
 
         return $this->render('creature/new.html.twig',
@@ -108,5 +108,7 @@ class CreatureController extends AbstractController
     public function deleteAction($id)
     {
         $this->repository->removeById($id);
+
+        return $this->redirectToRoute('creature_index');
     }
 }
