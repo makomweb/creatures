@@ -1,17 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body -%}
-    <h1>Creature</h1>
+    <h1>{{ entity.name }}</h1>
 
-    <table class="record_properties">
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ entity.name }}</td>
             </tr>
             <tr>
                 <th>Attack</th>
@@ -24,16 +20,12 @@
         </tbody>
     </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('creature_index') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('creature_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-</ul>
+    <div class="d-flex justify-content-center">
+        <div class="btn-group">
+            <a href="{{ path('creature_index') }}" class="btn btn-outline-secondary btn-medium">Back to the list</a>
+            <a href="{{ path('creature_edit', { 'id': entity.id }) }}" class="btn btn-outline-secondary btn-medium">Edit</a>
+            <a href="{{ path('creature_delete', { 'id': entity.id }) }}" class="btn btn-outline-secondary btn-medium">Delete</a>
+        </div>
+    </div>
+
 {% endblock %}

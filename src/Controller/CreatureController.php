@@ -59,15 +59,15 @@ class CreatureController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="creature_new")
+     * @Route("/new", name="creature_create")
      */
-    public function newAction(Request $request): Response
+    public function createAction(Request $request): Response
     {
         $creature = new Creature();
         $creature->setAttack(666);
 
         $form = $this->createForm(CreatureType::class, $creature, [
-            'action' => $this->generateUrl('creature_new')
+            'action' => $this->generateUrl('creature_create')
         ]);
 
         $form->handleRequest($request);
