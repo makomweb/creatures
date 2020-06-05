@@ -59,6 +59,8 @@ class CreatureController extends AbstractController
     }
 
     /**
+     * Display a form to create a creature.
+     * 
      * @Route("/new", name="creature_create")
      */
     public function createAction(Request $request): Response
