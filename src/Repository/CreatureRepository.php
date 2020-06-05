@@ -48,7 +48,7 @@ class CreatureRepository extends ServiceEntityRepository
     }
     */
 
-    public function findById($id)
+    public function findById($id) : Creature
     {
         return $this->findOneBy(['id' => $id]);
     }

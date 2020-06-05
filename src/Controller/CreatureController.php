@@ -91,7 +91,7 @@ class CreatureController extends AbstractController
      * 
      * @Route("/edit/{id}", name="creature_edit")
      */
-    public function editAction($id)
+    public function editAction(Request $request, $id)
     {
         $creature = $this->repository->findById($id);
 
@@ -102,7 +102,7 @@ class CreatureController extends AbstractController
 
         $form = $this->createForm(CreatureType::class, $creature,
             [
-                'action' => $this->generateUrl('creature_create')
+                'action' => $this->generateUrl('creature_edit', array('id' => $id))
             ]
         );
 
@@ -111,11 +111,12 @@ class CreatureController extends AbstractController
         if ($form->isSubmitted() && $form->isValid())
         {
             $this->repository->save($creature);            
-            return $this->redirectToRoute('creature_index');
+            return $this->redirectToRoute('creature_show', array('id' => $id));
         }
 
-        return $this->render('creature/new.html.twig',
+        return $this->render('creature/edit.html.twig',
             [
+                'creature_name' => $creature->getName(),
                 'creature_form' => $form->createView()
             ]
         );
