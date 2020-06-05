@@ -29,33 +29,33 @@ class CreatureController extends AbstractController
      */
     public function indexAction()
     {
-        $entities = $this->repository->findAll();
+        $creatures = $this->repository->findAll();
         
         return $this->render('creature/index.html.twig',
             [
-                'entities' => $entities
+                'entities' => $creatures
             ]);
     }
 
     /**
-     * Show a single creature entity.
+     * Show a single creature.
      * 
      * @Route("/show/{id}", name="creature_show")
      */
     public function showAction($id)
     {
-        $entity = $this->repository->findById($id);
+        $creature = $this->repository->findById($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException(
-                'No creature found for id '.$id
-            );
+        if (!$creature)
+        {
+            throw $this->createNotFoundException('No creature found for id '. $id);
         }
 
         return $this->render('creature/show.html.twig',
             [
-                'entity' => $entity
-            ]);
+                'entity' => $creature
+            ]
+        );
     }
 
     /**
@@ -64,11 +64,12 @@ class CreatureController extends AbstractController
     public function createAction(Request $request): Response
     {
         $creature = new Creature();
-        $creature->setAttack(666);
-
-        $form = $this->createForm(CreatureType::class, $creature, [
-            'action' => $this->generateUrl('creature_create')
-        ]);
+        
+        $form = $this->createForm(CreatureType::class, $creature,
+            [
+                'action' => $this->generateUrl('creature_create')
+            ]
+        );
 
         $form->handleRequest($request);
 
@@ -79,9 +80,10 @@ class CreatureController extends AbstractController
         }
 
         return $this->render('creature/new.html.twig',
-        [
-            'creature_form' => $form->createView()
-        ]);
+            [
+                'creature_form' => $form->createView()
+            ]
+        );
     }
 
     /**
@@ -91,13 +93,32 @@ class CreatureController extends AbstractController
      */
     public function editAction($id)
     {
-        $entity = $this->repository->findById($id);
+        $creature = $this->repository->findById($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException(
-                'No creature found for id '.$id
-            );
+        if (!$creature)
+        {
+            throw $this->createNotFoundException('No creature found for id '. $id);
         }
+
+        $form = $this->createForm(CreatureType::class, $creature,
+            [
+                'action' => $this->generateUrl('creature_create')
+            ]
+        );
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $this->repository->save($creature);            
+            return $this->redirectToRoute('creature_index');
+        }
+
+        return $this->render('creature/new.html.twig',
+            [
+                'creature_form' => $form->createView()
+            ]
+        );
     }
 
 
