@@ -2,12 +2,16 @@
 
 {% block body %}
 
-    <h1>Edit {{ creature_name}}</h1>
+<div class="container">
+
+    <h1>Edit creature</h1>
 
     {{ form_start(creature_form) }}
     
     {{ form_widget(creature_form) }}
 
     {{ form_end(creature_form) }}
+
+</div>
 
 {% endblock %}

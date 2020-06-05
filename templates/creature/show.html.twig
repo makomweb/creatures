@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body -%}
+
+<div class="container">
+
     <h1>{{ entity.name }}</h1>
 
     <table class="table">
@@ -27,5 +30,7 @@
             <a href="{{ path('creature_delete', { 'id': entity.id }) }}" class="btn btn-outline-secondary btn-medium">Delete</a>
         </div>
     </div>
+
+</div>
 
 {% endblock %}
