@@ -2,43 +2,35 @@
 
 {% block body %}
 
-<div class="container">
+<div class="container-fluid">
 
     <h1>List of creatures</h1>
     
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Attack</th>
-                <th>Defense</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="card-deck">
         {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('creature_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.name }}</td>
-                <td>{{ entity.defense }}</td>
-                <td>{{ entity.attack }}</td>
-                <td>
+            <div class="card" style="width: 18rem;">
+                
+                <h5 class="card-header">{{ entity.name }}</h5>
+
+                <div class="card-body">
+                    <p class="card-text">ID: {{entity.id }}</p>
+                    <p class="card-text">Defense: {{ entity.defense }}</p>
+                    <p class="card-text">Attack: {{ entity.attack }}</p>
+
                     <div class="btn-group">
                         <a href="{{ path('creature_show', { 'id': entity.id }) }}"
-                            class="btn btn-outline-secondary btn-sm">Details</a>
+                            class="btn btn-outline-success btn-sm">Show</a>
                         <a href="{{ path('creature_edit', { 'id': entity.id }) }}"
-                            class="btn btn-outline-secondary btn-sm">Edit</a>
+                            class="btn btn-outline-primary btn-sm">Edit</a>
                         <a href="{{ path('creature_delete', { 'id': entity.id }) }}"
-                            class="btn btn-outline-secondary btn-sm">Delete</a>
+                            class="btn btn-outline-danger btn-sm">Delete</a>
                     </div>
-                </td>
-            </tr>
+                </div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
+    </div>
 
-    <div class="text-center">
+    <div class="btn-group mt-3">
         <a href="{{ path('creature_create') }}" class="btn btn-primary">Add new creature</a>
     </div>
 </div>

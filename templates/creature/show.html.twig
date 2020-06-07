@@ -2,35 +2,27 @@
 
 {% block body -%}
 
-<div class="container">
+<div class="container-fluid mt-3">
 
-    <h1>{{ entity.name }}</h1>
+    <div class="card">
+        
+        <h5 class="card-header">{{ entity.name }}</h5>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Attack</th>
-                <td>{{ entity.attack }}</td>
-            </tr>
-            <tr>
-                <th>Defense</th>
-                <td>{{ entity.defense }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="d-flex justify-content-center">
-        <div class="btn-group">
-            <a href="{{ path('creature_index') }}" class="btn btn-outline-secondary btn-medium">Back to the list</a>
-            <a href="{{ path('creature_edit', { 'id': entity.id }) }}" class="btn btn-outline-secondary btn-medium">Edit</a>
-            <a href="{{ path('creature_delete', { 'id': entity.id }) }}" class="btn btn-outline-secondary btn-medium">Delete</a>
+        <div class="card-body">
+            <p class="card-text">ID: {{entity.id }}</p>
+            <p class="card-text">Defense: {{ entity.defense }}</p>
+            <p class="card-text">Attack: {{ entity.attack }}</p>
+        
+            <div class="btn-group text-right">
+                <a href="{{ path('creature_edit', { 'id': entity.id }) }}" class="btn btn-outline-primary btn-sm">Edit</a>
+                <a href="{{ path('creature_delete', { 'id': entity.id }) }}" class="btn btn-outline-danger btn-sm">Delete</a>
+            </div>
         </div>
     </div>
-
+    
+    <div class="btn-group mt-3">
+        <a href="{{ path('creature_index') }}" class="btn btn-primary btn-medium">Back to the list</a>
+    </div>
 </div>
 
 {% endblock %}
