@@ -144,10 +144,13 @@ class CreatureController extends AbstractController
      */
     public function graphAction(Request $request): Response
     {
-        $data = 'world';
+        $data1 = [1,2,3,4,5,6,7];
+        $data2 = [6,5,4,3,2,1,0];
+        
         return $this->render('creature/graph.html.twig',
             [
-                'data' => $data
+                'data1' => $data1,
+                'data2' => $data2
             ]);
     }
 }
