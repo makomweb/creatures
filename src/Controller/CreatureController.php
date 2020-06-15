@@ -138,12 +138,12 @@ class CreatureController extends AbstractController
     }
 
     /**
+     * Show a graph
+     * 
      * @Route("/graph", name="creature_graph")
      */
-    public function graphAction() : Response
+    public function graphAction(Request $request): Response
     {
-        return new Response("foobar");
-        
         $data = 'world';
         return $this->render('creature/graph.html.twig',
             [
