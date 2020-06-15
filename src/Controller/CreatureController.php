@@ -146,12 +146,9 @@ class CreatureController extends AbstractController
     {        
         $data = $this->repository->findAll();
 
-        $count = count($data);
-
         return $this->render('creature/graph.html.twig',
             [
-                'data' => $data,
-                'count' => $count
+                'data' => $data
             ]);
     }
 }
