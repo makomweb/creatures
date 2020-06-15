@@ -143,14 +143,35 @@ class CreatureController extends AbstractController
      * @Route("/graph", name="creature_graph")
      */
     public function graphAction(Request $request): Response
-    {
+    {        
+        $creatures = $this->repository->findAll();
+
+        var_dump($creatures);
+        /*
         $data1 = [1,2,3,4,5,6,7];
         $data2 = [6,5,4,3,2,1,0];
-        
+        */
+
+        /*
+        [
+            ['Year', 'Sales', 'Expenses'],
+            ['2004',  1000,      400],
+            ['2005',  1170,      460],
+            ['2006',  660,       1120],
+            ['2007',  1030,      540]
+        ]
+        */
+
+        $data = [array('Name', 'Attack', 'Defence')];
+
+        foreach ($creatures as $creature)
+        {
+            array_push($data, array('Goblin', 12, 23));
+        }
+
         return $this->render('creature/graph.html.twig',
             [
-                'data1' => $data1,
-                'data2' => $data2
+                'data' => $creatures
             ]);
     }
 }
