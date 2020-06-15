@@ -155,17 +155,13 @@ class CreatureController extends AbstractController
             ['2007',  1030,      540]
         ]
         */
-
-        $data = [array('Name', 'Attack', 'Defence')];
-
-        foreach ($creatures as $creature)
-        {
-            array_push($data, array('Goblin', 12, 23));
-        }
+        
+        $count = count($creatures);
 
         return $this->render('creature/graph.html.twig',
             [
-                'data' => $creatures
+                'data' => $creatures,
+                'count' => $count
             ]);
     }
 }
