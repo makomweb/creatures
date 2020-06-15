@@ -1,25 +1,23 @@
 <?php
 
-
 namespace App\Controller;
 
-use App\Entity\Creature;
-use App\Form\CreatureType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/chart")
  */
-class CreatureController
+class ChartController extends AbstractController
 {
     /**
      * Show a chart
      * 
      * @Route("/show", name="chart_show")
      */
-    public function show()
+    public function showAction()
     {
         $data = 'world';
         
