@@ -27,7 +27,7 @@ class CreatureController extends AbstractController
      * 
      * @Route("/index", name="creature_index")
      */
-    public function indexAction()
+    public function indexAction() : Response
     {
         $creatures = $this->repository->findAll();
         
@@ -42,7 +42,7 @@ class CreatureController extends AbstractController
      * 
      * @Route("/show/{id}", name="creature_show")
      */
-    public function showAction($id)
+    public function showAction($id) : Response
     {
         $creature = $this->repository->findById($id);
 
@@ -93,7 +93,7 @@ class CreatureController extends AbstractController
      * 
      * @Route("/edit/{id}", name="creature_edit")
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, $id) : Response
     {
         $creature = $this->repository->findById($id);
 
@@ -130,7 +130,7 @@ class CreatureController extends AbstractController
      * 
      * @Route("/delete/{id}", name="creature_delete")
      */
-    public function deleteAction($id)
+    public function deleteAction($id) : Response
     {
         $this->repository->removeById($id);
 
