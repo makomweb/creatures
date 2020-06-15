@@ -146,12 +146,6 @@ class CreatureController extends AbstractController
     {        
         $creatures = $this->repository->findAll();
 
-        var_dump($creatures);
-        /*
-        $data1 = [1,2,3,4,5,6,7];
-        $data2 = [6,5,4,3,2,1,0];
-        */
-
         /*
         [
             ['Year', 'Sales', 'Expenses'],
