@@ -144,23 +144,13 @@ class CreatureController extends AbstractController
      */
     public function graphAction(Request $request): Response
     {        
-        $creatures = $this->repository->findAll();
+        $data = $this->repository->findAll();
 
-        /*
-        [
-            ['Year', 'Sales', 'Expenses'],
-            ['2004',  1000,      400],
-            ['2005',  1170,      460],
-            ['2006',  660,       1120],
-            ['2007',  1030,      540]
-        ]
-        */
-        
-        $count = count($creatures);
+        $count = count($data);
 
         return $this->render('creature/graph.html.twig',
             [
-                'data' => $creatures,
+                'data' => $data,
                 'count' => $count
             ]);
     }
