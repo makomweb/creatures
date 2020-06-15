@@ -136,4 +136,18 @@ class CreatureController extends AbstractController
 
         return $this->redirectToRoute('creature_index');
     }
+
+    /**
+     * @Route("/graph", name="creature_graph")
+     */
+    public function graphAction() : Response
+    {
+        return new Response("foobar");
+        
+        $data = 'world';
+        return $this->render('creature/graph.html.twig',
+            [
+                'data' => $data
+            ]);
+    }
 }
