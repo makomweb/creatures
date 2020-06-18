@@ -9,7 +9,8 @@
             crossorigin="anonymous">
         {% block stylesheets %}{% endblock %}
     </head>
-    <body>
+    <body>    
+        {% include('navbar.html.twig') %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
